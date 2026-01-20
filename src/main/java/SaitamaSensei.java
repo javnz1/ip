@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SaitamaSensei {
@@ -5,6 +6,7 @@ public class SaitamaSensei {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> taskList = new ArrayList<>();
 
         System.out.println(HORIZONTAL_LINE);
         System.out.println("Hello! I'm Saitama Sensei!");
@@ -14,9 +16,19 @@ public class SaitamaSensei {
         String command = scanner.nextLine();
 
         while (!command.equalsIgnoreCase("bye")) {
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(command);
-            System.out.println(HORIZONTAL_LINE);
+            if (!command.equalsIgnoreCase("list")){
+                taskList.add(command);
+
+                System.out.println(HORIZONTAL_LINE);
+                System.out.println("Added: " + command);
+                System.out.println(HORIZONTAL_LINE);
+            } else {
+                System.out.println(HORIZONTAL_LINE);
+                for (int i = 0; i < taskList.size(); i++){
+                    System.out.println((i+1) + ". " + taskList.get(i));
+                }
+                System.out.println(HORIZONTAL_LINE);
+            }
 
             command = scanner.nextLine();
         }
