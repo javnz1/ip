@@ -28,9 +28,9 @@ public class SaitamaSensei {
                 } else if (command.startsWith("unmark")) {
                     command = command.replace("unmark", "").trim();
                     if (command.isEmpty())
-                        throw new SaitamaException("ONE PUNCH!!! Please let Sensei know which Task Number you like to PUNCH! 👊\n" +
+                        throw new SaitamaException("ONE PUNCH!!! Please let Sensei know which Task Number you like to UN-PUNCH! 👊\n" +
                                 "if you do not know the task number please type 'list' to view list then do\n" +
-                                "mark [task number in the list]");
+                                "umark [task number in the list]");
 
                     int num = Integer.parseInt(command) - 1;
                     taskList.get(num).unmarkAsDone();
@@ -103,6 +103,22 @@ public class SaitamaSensei {
                     Task new_task = new Events(description, from, to);
                     taskList.add(new_task);
                     taskString(new_task);
+                } else if (command.startsWith("delete")) {
+                    command = command.replace("delete", "").trim();
+                    if (command.isEmpty()) {
+                        throw new SaitamaException("ONE PUNCH!!! Which task are we deleting? 👊\n" +
+                                "if you do not know the task number please type 'list' to view list then do\n" +
+                                "delete [task number in the list]");
+                    }
+
+                    int num = Integer.parseInt(command) - 1;
+                    Task removedTask = taskList.remove(num);
+
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(removedTask);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println(HORIZONTAL_LINE);
                 } else {
                     throw new SaitamaException("ONE PUNCH!!! I don't understand you. Please input a specific PUNCH command in the format below:\n" +
                             "todo [description]\n" +
@@ -110,7 +126,8 @@ public class SaitamaSensei {
                             "event [description] /from [date/time/day] /to [date/time/day]\n" +
                             "list\n" +
                             "mark [task number in the list]\n" +
-                            "unmark [task number in the list]");
+                            "unmark [task number in the list]\n" +
+                            "delete [task number in the list]");
                 }
             } catch (SaitamaException e) {
                 System.out.println(HORIZONTAL_LINE);
