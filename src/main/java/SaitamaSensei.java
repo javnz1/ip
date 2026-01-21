@@ -17,54 +17,114 @@ public class SaitamaSensei {
         String command = scanner.nextLine();
 
         while (!command.equalsIgnoreCase("bye")) {
-            if (command.equalsIgnoreCase("list")){
-                System.out.println(HORIZONTAL_LINE);
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < taskList.size(); i++){
-                    System.out.println((i+1) + "." + taskList.get(i));
+            try {
+                if (command.equalsIgnoreCase("list")) {
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        System.out.println((i + 1) + "." + taskList.get(i));
+                    }
+                    System.out.println(HORIZONTAL_LINE);
+                } else if (command.startsWith("unmark")) {
+                    command = command.replace("unmark", "").trim();
+                    if (command.isEmpty())
+                        throw new SaitamaException("ONE PUNCH!!! Please let Sensei know which Task Number you like to PUNCH! 👊\n" +
+                                "if you do not know the task number please type 'list' to view list then do\n" +
+                                "mark [task number in the list]");
+
+                    int num = Integer.parseInt(command) - 1;
+                    taskList.get(num).unmarkAsDone();
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println(taskList.get(num));
+                    System.out.println(HORIZONTAL_LINE);
+                } else if (command.startsWith("mark")) {
+                    command = command.replace("mark", "").trim();
+                    if (command.isEmpty())
+                        throw new SaitamaException("ONE PUNCH!!! Please let Sensei know which Task Number you like to PUNCH! 👊\n" +
+                                "if you do not know the task number please type 'list' to view list then do\n" +
+                                "mark [task number in the list]");
+
+                    int num = Integer.parseInt(command) - 1;
+                    taskList.get(num).markAsDone();
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(taskList.get(num));
+                    System.out.println(HORIZONTAL_LINE);
+                } else if (command.startsWith("todo")) {
+                    String description = command.replace("todo", "").trim();
+                    if (description.isEmpty())
+                        throw new SaitamaException("ONE PUNCH!!! The PUNCH description can't be empty PLEASE describe it! 👊\n" +
+                                "todo [description]");
+
+                    Task new_task = new ToDos(description);
+                    taskList.add(new_task);
+                    taskString(new_task);
+                } else if (command.startsWith("deadline")) {
+                    if (!command.contains("/by"))
+                        throw new SaitamaException("ONE PUNCH!!! Deadlines need a /by [date/time/day] so that I know when I need to PUNCH before its gone! 👊\n" +
+                                "deadline [description] /by [date/time/day]");
+
+                    String[] subcommand = command.split("/by ");
+                    String description = subcommand[0].replace("deadline ", "").trim();
+                    if (description.isEmpty())
+                        throw new SaitamaException("ONE PUNCH!!! The PUNCH description can't be empty PLEASE describe it! 👊\n" +
+                                "deadline [description] /by [date/time/day]");
+                    else if (subcommand.length < 2 || subcommand[1].trim().isEmpty())
+                        throw new SaitamaException("ONE PUNCH!!! The PUNCH /by can't be empty PLEASE input date/time/day! 👊\n" +
+                                "deadline [description] /by [date/time/day]");
+
+                    String by = subcommand[1].trim();
+
+                    Task new_task = new Deadline(description, by);
+                    taskList.add(new_task);
+                    taskString(new_task);
+                } else if (command.startsWith("event")) {
+                    if (!command.contains("/from") || !command.contains("/to"))
+                        throw new SaitamaException("ONE PUNCH!!! Events need both /from and /to times so that I know when I need to PUNCH before its gone! 👊\n" +
+                                "event [description] /from [date/time/day] /to [date/time/day]");
+
+                    String[] subcommand = command.split("/from ");
+                    String description = subcommand[0].replace("event ", "").trim();
+                    if (description.isEmpty())
+                        throw new SaitamaException("ONE PUNCH!!! The PUNCH description can't be empty PLEASE describe it! 👊\n" +
+                                "event [description] /from [date/time/day] /to [date/time/day]");
+
+                    String[] date = subcommand[1].split("/to ");
+                    if (date.length < 2)
+                        throw new SaitamaException("ONE PUNCH!!! The PUNCH /from and /to can't be empty PLEASE input date/time/day for both! 👊\n" +
+                                "event [description] /from [date/time/day] /to [date/time/day]");
+                    String from = date[0].trim();
+                    String to = date[1].trim();
+                    if (from.isEmpty() || to.isEmpty())
+                        throw new SaitamaException("ONE PUNCH!!! The PUNCH /from and /to can't be empty PLEASE input date/time/day for both! 👊\n" +
+                                "event [description] /from [date/time/day] /to [date/time/day]");
+
+                    Task new_task = new Events(description, from, to);
+                    taskList.add(new_task);
+                    taskString(new_task);
+                } else {
+                    throw new SaitamaException("ONE PUNCH!!! I don't understand you. Please input a specific PUNCH command in the format below:\n" +
+                            "todo [description]\n" +
+                            "deadline [description] /by [date/time/day]\n" +
+                            "event [description] /from [date/time/day] /to [date/time/day]\n" +
+                            "list\n" +
+                            "mark [task number in the list]\n" +
+                            "unmark [task number in the list]");
                 }
+            } catch (SaitamaException e) {
                 System.out.println(HORIZONTAL_LINE);
-            } else if (command.startsWith("mark")){
-                int num = Integer.parseInt(command.split(" ")[1]) - 1;
+                System.out.println(e.getMessage());
                 System.out.println(HORIZONTAL_LINE);
-                System.out.println("Nice! I've marked this task as done:");
-                taskList.get(num).markAsDone();
-                System.out.println(taskList.get(num));
+            } catch (NumberFormatException e) {
                 System.out.println(HORIZONTAL_LINE);
-            } else if (command.startsWith("unmark")){
-                int num = Integer.parseInt(command.split(" ")[1]) - 1;
+                System.out.println("ONE PUNCH!!! Please enter a valid number! 👊");
                 System.out.println(HORIZONTAL_LINE);
-                System.out.println("OK, I've marked this task as not done yet:");
-                taskList.get(num).unmarkAsDone();
-                System.out.println(taskList.get(num));
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println(HORIZONTAL_LINE);
-            } else if (command.startsWith("todo")) {
-                String description = command.replace("todo ", "").trim();
-
-                Task new_task = new ToDos(description);
-                taskList.add(new_task);
-                taskString(new_task);
-            } else if (command.startsWith("deadline")) {
-                String[] subcommand = command.split("/by ");
-                String description = subcommand[0].replace("deadline ", "").trim();
-                String by = subcommand[1];
-
-                Task new_task = new Deadline(description,by);
-                taskList.add(new_task);
-                taskString(new_task);
-            } else if (command.startsWith("event")) {
-                String[] subcommand = command.split("/from ");
-                String description = subcommand[0].replace("event ", "").trim();
-
-                String[] date = subcommand[1].split("/to ");
-                String from = date[0].trim();
-                String to = date[1].trim();
-
-                Task new_task = new Events(description,from, to);
-                taskList.add(new_task);
-                taskString(new_task);
+                System.out.println("ONE PUNCH!!! That task number doesn't exist in the list! 👊");
+                System.out.println(HORIZONTAL_LINE);
             }
-
             command = scanner.nextLine();
         }
         System.out.println(HORIZONTAL_LINE);
@@ -72,7 +132,7 @@ public class SaitamaSensei {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    public static void taskString(Task task){
+    public static void taskString(Task task) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
