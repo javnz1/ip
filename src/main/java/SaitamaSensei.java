@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SaitamaSensei {
+    private static Storage storage = new Storage("./data/saitama.txt");
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
     private static ArrayList<Task> taskList;
 
@@ -10,8 +11,9 @@ public class SaitamaSensei {
     }
 
     public static void main(String[] args) {
+        taskList = storage.load();
+
         Scanner scanner = new Scanner(System.in);
-        taskList = new ArrayList<>();
 
         System.out.println(HORIZONTAL_LINE);
         System.out.println("Hello! I'm Saitama Sensei!");
@@ -49,6 +51,7 @@ public class SaitamaSensei {
                         System.out.println("OK, I've marked this task as not done yet:");
                         System.out.println(taskList.get(num_unmark));
                         System.out.println(HORIZONTAL_LINE);
+                        storage.save(taskList);
                         break;
                     case MARK:
                         command = command.replace("mark", "").trim();
@@ -63,6 +66,7 @@ public class SaitamaSensei {
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(taskList.get(num_mark));
                         System.out.println(HORIZONTAL_LINE);
+                        storage.save(taskList);
                         break;
                     case TODO:
                         String description = command.replace("todo", "").trim();
@@ -73,6 +77,7 @@ public class SaitamaSensei {
                         Task new_task = new ToDos(description);
                         taskList.add(new_task);
                         taskString(new_task);
+                        storage.save(taskList);
                         break;
                     case DEADLINE:
                         if (!command.contains("/by"))
@@ -93,6 +98,7 @@ public class SaitamaSensei {
                         Task new_task_deadline = new Deadline(description_deadline, by);
                         taskList.add(new_task_deadline);
                         taskString(new_task_deadline);
+                        storage.save(taskList);
                         break;
                     case EVENT:
                         if (!command.contains("/from") || !command.contains("/to"))
@@ -118,6 +124,7 @@ public class SaitamaSensei {
                         Task new_task_event = new Events(description_event, from, to);
                         taskList.add(new_task_event);
                         taskString(new_task_event);
+                        storage.save(taskList);
                         break;
                     case DELETE:
                         command = command.replace("delete", "").trim();
@@ -135,6 +142,7 @@ public class SaitamaSensei {
                         System.out.println(removedTask);
                         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                         System.out.println(HORIZONTAL_LINE);
+                        storage.save(taskList);
                         break;
                     case UNKNOWN:
                     default:
