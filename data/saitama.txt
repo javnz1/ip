@@ -1,0 +1,3 @@
+T | 0 | swim
+T | 0 | punch
+T | 0 | jump
