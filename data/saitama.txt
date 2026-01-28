@@ -1,3 +1,4 @@
 T | 0 | swim
 T | 0 | punch
 T | 0 | jump
+E | 1 | Career Fair | 2026-01-28 | 2026-01-30
