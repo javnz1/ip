@@ -1,3 +1,10 @@
+package saitama.storage;
+
+import saitama.task.Deadline;
+import saitama.task.Events;
+import saitama.task.Task;
+import saitama.task.ToDos;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
