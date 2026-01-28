@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,9 +57,9 @@ public class Storage {
         String base = type + " | " + isDone + " | " + t.description;
 
         if (t instanceof Deadline) {
-            return base + " | " + ((Deadline) t).by;
+            return base + " | " + ((Deadline) t).by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         } else if (t instanceof Events) {
-            return base + " | " + ((Events) t).from + " | " + ((Events) t).to;
+            return base + " | " + ((Events) t).from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " | " + ((Events) t).to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
         return base;
     }

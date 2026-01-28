@@ -81,50 +81,59 @@ public class SaitamaSensei {
                         break;
                     case DEADLINE:
                         if (!command.contains("/by"))
-                            throw new SaitamaException("ONE PUNCH!!! Deadlines need a /by [date/time/day] so that I know when I need to PUNCH before its gone! 👊\n" +
-                                    "deadline [description] /by [date/time/day]");
+                            throw new SaitamaException("ONE PUNCH!!! Deadlines need a /by [yyyy-mm-dd HHmm] so that I know when I need to PUNCH before its gone! 👊\n" +
+                                    "deadline [description] /by [yyyy-MM-dd HHmm]");
 
                         String[] subcommand = command.split("/by ");
                         String description_deadline = subcommand[0].replace("deadline ", "").trim();
                         if (description_deadline.isEmpty())
                             throw new SaitamaException("ONE PUNCH!!! The PUNCH description can't be empty PLEASE describe it! 👊\n" +
-                                    "deadline [description] /by [date/time/day]");
+                                    "deadline [description] /by [yyyy-MM-dd HHmm]");
                         else if (subcommand.length < 2 || subcommand[1].trim().isEmpty())
-                            throw new SaitamaException("ONE PUNCH!!! The PUNCH /by can't be empty PLEASE input date/time/day! 👊\n" +
-                                    "deadline [description] /by [date/time/day]");
+                            throw new SaitamaException("ONE PUNCH!!! The PUNCH /by can't be empty PLEASE input yyyy-MM-dd HHmm! 👊\n" +
+                                    "deadline [description] /by [yyyy-MM-dd HHmm]");
+                        try{
+                            String by = subcommand[1].trim();
 
-                        String by = subcommand[1].trim();
-
-                        Task new_task_deadline = new Deadline(description_deadline, by);
-                        taskList.add(new_task_deadline);
-                        taskString(new_task_deadline);
-                        storage.save(taskList);
+                            Task new_task_deadline = new Deadline(description_deadline, by);
+                            taskList.add(new_task_deadline);
+                            taskString(new_task_deadline);
+                            storage.save(taskList);
+                        } catch (java.time.format.DateTimeParseException e) {
+                            throw new SaitamaException("ONE PUNCH!!! SaitamaSensei only understands dates in yyyy-MM-dd HHmm format! 👊\n" +
+                                    "deadline [description] /by [yyyy-MM-dd HHmm]");
+                        }
                         break;
                     case EVENT:
                         if (!command.contains("/from") || !command.contains("/to"))
                             throw new SaitamaException("ONE PUNCH!!! Events need both /from and /to times so that I know when I need to PUNCH before its gone! 👊\n" +
-                                    "event [description] /from [date/time/day] /to [date/time/day]");
+                                    "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
 
                         String[] subcommand_event = command.split("/from ");
                         String description_event = subcommand_event[0].replace("event ", "").trim();
                         if (description_event.isEmpty())
                             throw new SaitamaException("ONE PUNCH!!! The PUNCH description can't be empty PLEASE describe it! 👊\n" +
-                                    "event [description] /from [date/time/day] /to [date/time/day]");
+                                    "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
 
                         String[] date = subcommand_event[1].split("/to ");
                         if (date.length < 2)
-                            throw new SaitamaException("ONE PUNCH!!! The PUNCH /from and /to can't be empty PLEASE input date/time/day for both! 👊\n" +
-                                    "event [description] /from [date/time/day] /to [date/time/day]");
+                            throw new SaitamaException("ONE PUNCH!!! The PUNCH /from and /to can't be empty PLEASE input yyyy-MM-dd for both! 👊\n" +
+                                    "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
                         String from = date[0].trim();
                         String to = date[1].trim();
                         if (from.isEmpty() || to.isEmpty())
-                            throw new SaitamaException("ONE PUNCH!!! The PUNCH /from and /to can't be empty PLEASE input date/time/day for both! 👊\n" +
-                                    "event [description] /from [date/time/day] /to [date/time/day]");
+                            throw new SaitamaException("ONE PUNCH!!! The PUNCH /from and /to can't be empty PLEASE input yyyy-MM-dd for both! 👊\n" +
+                                    "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
 
-                        Task new_task_event = new Events(description_event, from, to);
-                        taskList.add(new_task_event);
-                        taskString(new_task_event);
-                        storage.save(taskList);
+                        try {
+                            Task new_task_event = new Events(description_event, from, to);
+                            taskList.add(new_task_event);
+                            taskString(new_task_event);
+                            storage.save(taskList);
+                        } catch (java.time.format.DateTimeParseException e) {
+                            throw new SaitamaException("ONE PUNCH!!! SaitamaSensei only understands dates in yyyy-MM-dd format! 👊\n" +
+                                    "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
+                        }
                         break;
                     case DELETE:
                         command = command.replace("delete", "").trim();
