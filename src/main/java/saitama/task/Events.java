@@ -1,10 +1,12 @@
+package saitama.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Events extends Task{
-    protected LocalDate from;
-    protected LocalDate to;
+    public LocalDate from;
+    public LocalDate to;
 
     public Events(String description, String from, String to) {
         super(description);

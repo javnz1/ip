@@ -1,3 +1,12 @@
+package saitama;
+
+import saitama.task.Task;
+import saitama.task.ToDos;
+import saitama.task.Deadline;
+import saitama.task.Events;
+import saitama.storage.Storage;
+import saitama.exception.SaitamaException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

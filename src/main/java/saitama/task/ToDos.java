@@ -1,4 +1,6 @@
-public class ToDos extends Task{
+package saitama.task;
+
+public class ToDos extends Task {
     public ToDos(String description) {
         super(description);
     }
