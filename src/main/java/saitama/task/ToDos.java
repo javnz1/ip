@@ -19,7 +19,7 @@ public class ToDos extends Task {
      * @return A formatted string representing the todo task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }
