@@ -10,15 +10,27 @@ import saitama.exception.SaitamaException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Main entry point for the Saitama Sensei task management application.
+ * Handles user input, command execution, and task list coordination.
+ */
 public class SaitamaSensei {
     private static Storage storage = new Storage("./data/saitama.txt");
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
     private static ArrayList<Task> taskList;
 
+    /**
+     * Represents the various commands supported by Saitama Sensei.
+     */
     public enum CommandType {
         TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, BYE, UNKNOWN
     }
 
+    /**
+     * Initializes the application, loads tasks from storage, and enters the command loop.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         taskList = storage.load();
 
@@ -192,6 +204,11 @@ public class SaitamaSensei {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Prints the confirmation message when a task is successfully added to the list.
+     *
+     * @param task The task that was added.
+     */
     public static void taskString(Task task) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println("Got it. I've added this task:");
@@ -200,6 +217,12 @@ public class SaitamaSensei {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Parses the user input to determine which command to execute.
+     *
+     * @param input The full line of text entered by the user.
+     * @return The corresponding CommandType enum, or UNKNOWN if the input is invalid.
+     */
     private static CommandType getCommandType(String input) {
         try {
             String firstWord = input.split(" ")[0].toUpperCase();

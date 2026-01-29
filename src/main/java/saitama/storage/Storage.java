@@ -12,13 +12,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the loading and saving of task data to a local file.
+ * This class facilitates data persistence so that tasks are not lost when the program exits.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a Storage object with a specified file path.
+     *
+     * @param filePath The relative or absolute path to the data file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the current list of tasks to the hard drive.
+     * If the directory does not exist, it will be created.
+     *
+     * @param taskList The list of tasks to be written to the file.
+     */
     public void save(ArrayList<Task> taskList) {
         try {
             File f = new File(filePath);
@@ -35,6 +50,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the file specified in filePath.
+     * If the file does not exist, an empty task list is returned.
+     *
+     * @return An ArrayList containing the tasks loaded from the file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(filePath);
@@ -58,6 +79,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Formats a single Task object into a string suitable for file storage.
+     *
+     * @param t The task to be formatted.
+     * @return A pipe-separated string representing the task's data.
+     */
     public String fileFormat (Task t) {
         String type = (t instanceof ToDos) ? "T" : (t instanceof Deadline) ? "D" : "E";
         int isDone = t.isDone ? 1 : 0;
@@ -71,6 +98,12 @@ public class Storage {
         return base;
     }
 
+    /**
+     * Converts a string from the storage file back into a Task object.
+     *
+     * @param line The pipe-separated string from the data file.
+     * @return The corresponding Task object, or null if the format is unrecognized.
+     */
     public Task lineToTask(String line) {
         String[] parts = line.split(" \\| ");
         String type = parts[0];
