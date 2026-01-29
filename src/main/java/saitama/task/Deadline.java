@@ -3,7 +3,7 @@ package saitama.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     public LocalDateTime by;
 
     public Deadline(String description, String by) {
@@ -12,7 +12,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy h.mma")) + ")";
     }
 }
