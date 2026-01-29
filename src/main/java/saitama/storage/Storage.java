@@ -40,7 +40,7 @@ public class Storage {
             f.getParentFile().mkdirs();
             FileWriter fw = new FileWriter(f);
 
-            for (Task t: taskList) {
+            for (Task t : taskList) {
                 fw.write(fileFormat(t) + System.lineSeparator());
             }
 
@@ -112,17 +112,17 @@ public class Storage {
         Task t;
 
         switch (type) {
-            case "T":
-                t = new ToDos(description);
-                break;
-            case "D":
-                t = new Deadline(description, parts[3]);
-                break;
-            case "E":
-                t = new Events(description, parts[3], parts[4]);
-                break;
-            default:
-                return null;
+        case "T":
+            t = new ToDos(description);
+            break;
+        case "D":
+            t = new Deadline(description, parts[3]);
+            break;
+        case "E":
+            t = new Events(description, parts[3], parts[4]);
+            break;
+        default:
+            return null;
         }
 
         if (isDone)
