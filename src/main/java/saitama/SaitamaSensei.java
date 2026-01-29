@@ -23,7 +23,7 @@ public class SaitamaSensei {
      * Represents the various commands supported by Saitama Sensei.
      */
     public enum CommandType {
-        TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, BYE, UNKNOWN
+        TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, BYE, UNKNOWN
     }
 
     /**
@@ -174,6 +174,31 @@ public class SaitamaSensei {
                     System.out.println(HORIZONTAL_LINE);
                     storage.save(taskList);
                     break;
+                case FIND:
+                    command = command.replace("find", "").trim();
+                    if (command.isEmpty()) {
+                        throw new SaitamaException("ONE PUNCH!!! What are you looking for? 👊\n" +
+                                "Please provide a keyword!\n" +
+                                "find [keyword]");
+                    }
+
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.println("Here are the matching tasks in your list:");
+
+                    int findCount = 0;
+                    for (int i = 0; i < taskList.size(); i++) {
+                        Task current = taskList.get(i);
+                        if (current.description.toLowerCase().contains(command.toLowerCase())) {
+                            findCount++;
+                            System.out.println((i + 1) + "." + taskList.get(i));
+                        }
+                    }
+
+                    if (findCount == 0) {
+                        System.out.println("No matching tasks found. Better luck next time! 👊");
+                    }
+                    System.out.println(HORIZONTAL_LINE);
+                    break;
                 case UNKNOWN:
                 default:
                     throw new SaitamaException("ONE PUNCH!!! I don't understand you. Please input a specific PUNCH command in the format below:\n" +
@@ -183,6 +208,7 @@ public class SaitamaSensei {
                             "list\n" +
                             "mark [task number in the list]\n" +
                             "unmark [task number in the list]\n" +
+                            "find [task keyword]\n" +
                             "delete [task number in the list]");
                 }
             } catch (SaitamaException e) {

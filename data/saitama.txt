@@ -2,3 +2,4 @@ T | 0 | swim
 T | 0 | punch
 T | 0 | jump
 E | 1 | Career Fair | 2026-01-28 | 2026-01-30
+D | 1 | jumping block | 2026-01-29 2359
