@@ -1,16 +1,16 @@
 package saitama.storage;
 
-import saitama.task.Deadline;
-import saitama.task.Events;
-import saitama.task.Task;
-import saitama.task.ToDos;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import saitama.task.Deadline;
+import saitama.task.Events;
+import saitama.task.Task;
+import saitama.task.ToDos;
 
 /**
  * Handles the loading and saving of task data to a local file.
@@ -85,7 +85,7 @@ public class Storage {
      * @param t The task to be formatted.
      * @return A pipe-separated string representing the task's data.
      */
-    public String fileFormat (Task t) {
+    public String fileFormat(Task t) {
         String type = (t instanceof ToDos) ? "T" : (t instanceof Deadline) ? "D" : "E";
         int isDone = t.isDone ? 1 : 0;
         String base = type + " | " + isDone + " | " + t.description;
@@ -93,7 +93,8 @@ public class Storage {
         if (t instanceof Deadline) {
             return base + " | " + ((Deadline) t).by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         } else if (t instanceof Events) {
-            return base + " | " + ((Events) t).from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " | " + ((Events) t).to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return base + " | " + ((Events) t).from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " | "
+                    + ((Events) t).to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
         return base;
     }
@@ -125,8 +126,9 @@ public class Storage {
             return null;
         }
 
-        if (isDone)
+        if (isDone) {
             t.markAsDone();
+        }
 
         return t;
     }

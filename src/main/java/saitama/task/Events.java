@@ -1,7 +1,6 @@
 package saitama.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -31,6 +30,7 @@ public class Events extends Task {
      * @return A formatted string representing the event task.
      */
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " to: " + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " to: " + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
