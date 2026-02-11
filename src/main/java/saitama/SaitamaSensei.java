@@ -1,5 +1,7 @@
 package saitama;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import saitama.exception.SaitamaException;
@@ -33,7 +35,7 @@ public class SaitamaSensei {
      * Represents the various commands supported by Saitama Sensei.
      */
     public enum CommandType {
-        TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, BYE, UNKNOWN
+        TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, SCHEDULE, BYE, UNKNOWN
     }
 
     /**
@@ -137,9 +139,9 @@ public class SaitamaSensei {
                 break;
             case DEADLINE:
                 if (!command.contains("/by")) {
-                    throw new SaitamaException("ONE PUNCH!!! Deadlines need a /by [yyyy-mm-dd HHmm] so that I "
+                    throw new SaitamaException("ONE PUNCH!!! Deadlines need a /by [dd-MM-yyyy HHmm] so that I "
                             + "know when I need to PUNCH before its gone! 👊\n"
-                            + "deadline [description] /by [yyyy-MM-dd HHmm]");
+                            + "deadline [description] /by [dd-MM-yyyy HHmm]");
                 }
 
                 String[] subcommand = command.split("/by ");
@@ -147,11 +149,11 @@ public class SaitamaSensei {
                 if (descriptionDeadline.isEmpty()) {
                     throw new SaitamaException("ONE PUNCH!!! The PUNCH description can't be empty "
                             + "PLEASE describe it! 👊\n"
-                            + "deadline [description] /by [yyyy-MM-dd HHmm]");
+                            + "deadline [description] /by [dd-MM-yyyy HHmm]");
                 } else if (subcommand.length < 2 || subcommand[1].trim().isEmpty()) {
                     throw new SaitamaException("ONE PUNCH!!! The PUNCH /by can't be empty PLEASE "
-                            + "input yyyy-MM-dd HHmm! 👊\n"
-                            + "deadline [description] /by [yyyy-MM-dd HHmm]");
+                            + "input dd-MM-yyyy HHmm! 👊\n"
+                            + "deadline [description] /by [dd-MM-yyyy HHmm]");
                 }
                 try {
                     String by = subcommand[1].trim();
@@ -162,15 +164,15 @@ public class SaitamaSensei {
                     storage.save(taskList);
                 } catch (java.time.format.DateTimeParseException e) {
                     throw new SaitamaException("ONE PUNCH!!! SaitamaSensei only understands dates in "
-                            + "yyyy-MM-dd HHmm format! 👊\n"
-                            + "deadline [description] /by [yyyy-MM-dd HHmm]");
+                            + "dd-MM-yyyy HHmm format! 👊\n"
+                            + "deadline [description] /by [dd-MM-yyyy HHmm]");
                 }
                 break;
             case EVENT:
                 if (!command.contains("/from") || !command.contains("/to")) {
                     throw new SaitamaException("ONE PUNCH!!! Events need both /from and /to times so that I know "
                             + "when I need to PUNCH before its gone! 👊\n"
-                            + "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
+                            + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
                 }
 
                 String[] subcommandEvent = command.split("/from ");
@@ -178,21 +180,21 @@ public class SaitamaSensei {
                 if (descriptionEvent.isEmpty()) {
                     throw new SaitamaException("ONE PUNCH!!! The PUNCH description can't be empty "
                             + "PLEASE describe it! 👊\n"
-                            + "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
+                            + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
                 }
 
                 String[] date = subcommandEvent[1].split("/to ");
                 if (date.length < 2) {
                     throw new SaitamaException("ONE PUNCH!!! The PUNCH /from and /to can't be empty "
-                            + "PLEASE input yyyy-MM-dd for both! 👊\n"
-                            + "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
+                            + "PLEASE input dd-MM-yyyy for both! 👊\n"
+                            + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
                 }
                 String from = date[0].trim();
                 String to = date[1].trim();
                 if (from.isEmpty() || to.isEmpty()) {
                     throw new SaitamaException("ONE PUNCH!!! The PUNCH /from and /to can't be empty "
-                            + "PLEASE input yyyy-MM-dd for both! 👊\n"
-                            + "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
+                            + "PLEASE input dd-MM-yyyy for both! 👊\n"
+                            + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
                 }
 
                 try {
@@ -202,8 +204,8 @@ public class SaitamaSensei {
                     storage.save(taskList);
                 } catch (java.time.format.DateTimeParseException e) {
                     throw new SaitamaException("ONE PUNCH!!! SaitamaSensei only understands dates "
-                            + "in yyyy-MM-dd format! 👊\n"
-                            + "event [description] /from [yyyy-MM-dd] /to [yyyy-MM-dd]");
+                            + "in dd-MM-yyyy format! 👊\n"
+                            + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
                 }
                 break;
             case DELETE:
@@ -233,7 +235,7 @@ public class SaitamaSensei {
                 }
 
                 output.append(HORIZONTAL_LINE);
-                output.append("Here are the matching tasks in your list:");
+                output.append("Here are the matching tasks in your list:\n");
 
                 int findCount = 0;
                 for (int i = 0; i < taskList.size(); i++) {
@@ -248,6 +250,41 @@ public class SaitamaSensei {
                     output.append("No matching tasks found. Better luck next time! 👊\n");
                 }
                 output.append(HORIZONTAL_LINE);
+                break;
+            case SCHEDULE:
+                command = command.replace("schedule", "").trim();
+                if (command.isEmpty()) {
+                    throw new SaitamaException("ONE PUNCH!!! What task are you looking for a specific date? 👊\n"
+                            + "If you do not know the date please type 'list' to view list then do \n"
+                            + "schedule [dd-MM-yyyy]");
+                }
+
+                try {
+                    LocalDate checkDate = LocalDate.parse(command, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+                    output.append(HORIZONTAL_LINE);
+                    output.append("Here are the tasks in your list on the specific date (")
+                            .append(checkDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")))
+                            .append("):\n");
+
+                    int count = 0;
+                    for (Task task : taskList) {
+                        if (task.isOnDate(checkDate)) {
+                            count++;
+                            output.append(count).append(".").append(task).append("\n");
+                        }
+                    }
+
+                    if (count == 0) {
+                        output.append("No tasks found on specific date (").append(checkDate).append("). Better luck next time! 👊\n");
+                    }
+                    output.append(HORIZONTAL_LINE);
+                } catch (java.time.format.DateTimeParseException e) {
+                    throw new SaitamaException("ONE PUNCH!!! SaitamaSensei only understands dates "
+                            + "in dd-MM-yyyy format! 👊\n"
+                            + "schedule [dd-MM-yyyy]");
+                }
+
                 break;
             case BYE:
                 output.append(HORIZONTAL_LINE);
@@ -265,6 +302,7 @@ public class SaitamaSensei {
                         + "mark [task number in the list]\n"
                         + "unmark [task number in the list]\n"
                         + "find [task keyword]\n"
+                        + "schedule [date]\n"
                         + "delete [task number in the list]");
             }
         } catch (SaitamaException e) {

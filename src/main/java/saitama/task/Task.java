@@ -1,5 +1,7 @@
 package saitama.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a generic task in the Saitama Sensei application.
  * A task contains a description and a status indicating whether it is completed.
@@ -41,6 +43,14 @@ public class Task {
      */
     public void unmarkAsDone() {
         this.isDone = false;
+    }
+
+    /**
+     * Checks if the task is relevant to the given date.
+     * Default implementation returns false.
+     */
+    public boolean isOnDate(LocalDate date) {
+        return false;
     }
 
     /**
