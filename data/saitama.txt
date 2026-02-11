@@ -1,5 +1,6 @@
 T | 0 | swim
 T | 0 | punch
 T | 0 | jump
-E | 1 | Career Fair | 2026-01-28 | 2026-01-30
-D | 1 | jumping block | 2026-01-29 2359
+E | 1 | Career Fair | 28-01-2026 | 30-01-2026
+D | 1 | jumping block | 29-01-2026 2359
+E | 1 | cycling | 11-02-2026 | 13-02-2026

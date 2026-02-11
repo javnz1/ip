@@ -14,13 +14,24 @@ public class Events extends Task {
      * Constructs an Event task with a description and a duration.
      *
      * @param description The description of the event.
-     * @param from The start date in "yyyy-MM-dd" format.
-     * @param to The end date in "yyyy-MM-dd" format.
+     * @param from The start date in "dd-MM-yyyy" format.
+     * @param to The end date in "dd-MM-yyyy" format.
      */
     public Events(String description, String from, String to) {
         super(description);
-        this.from = LocalDate.parse(from.trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.to = LocalDate.parse(to.trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.from = LocalDate.parse(from.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        this.to = LocalDate.parse(to.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    /**
+     * Checks if the task is relevant to the given date.
+     *  Default implementation returns false.
+     *
+     * @return A boolean representing whether a task is in or within the given date
+     */
+    @Override
+    public boolean isOnDate(LocalDate date) {
+        return !date.isBefore(from) && !date.isAfter(to);
     }
 
     /**

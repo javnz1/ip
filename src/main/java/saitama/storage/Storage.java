@@ -91,10 +91,10 @@ public class Storage {
         String base = type + " | " + isDone + " | " + t.description;
 
         if (t instanceof Deadline) {
-            return base + " | " + ((Deadline) t).by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            return base + " | " + ((Deadline) t).by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         } else if (t instanceof Events) {
-            return base + " | " + ((Events) t).from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " | "
-                    + ((Events) t).to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return base + " | " + ((Events) t).from.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " | "
+                    + ((Events) t).to.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         }
         return base;
     }

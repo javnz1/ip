@@ -1,5 +1,6 @@
 package saitama.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,7 +18,18 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDateTime.parse(by.trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        this.by = LocalDateTime.parse(by.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+    }
+
+    /**
+     * Checks if the task is relevant to the given date.
+     *  Default implementation returns false.
+     *
+     * @return A boolean representing whether a task is in or within the given date
+     */
+    @Override
+    public boolean isOnDate(LocalDate date) {
+        return this.by.toLocalDate().equals(date);
     }
 
     /**
