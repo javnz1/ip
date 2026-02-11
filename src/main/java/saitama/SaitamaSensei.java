@@ -69,9 +69,11 @@ public class SaitamaSensei {
     /**
      * Generates a response for the user's chat message.
      */
-    public String getResponse(String command) {
-        CommandType type = getCommandType(command);
+    public String getResponse(String inputCommand) {
+        CommandType type = getCommandType(inputCommand);
         StringBuilder output = new StringBuilder();
+
+        String command  = inputCommand;
 
         try {
             switch (type) {
