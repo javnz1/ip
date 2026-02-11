@@ -26,6 +26,7 @@ public class SaitamaSensei {
     public SaitamaSensei(String filePath) {
         storage = new Storage(filePath);
         taskList = storage.load();
+        assert taskList != null : "taskList should be initialized after loading from Storage";
     }
 
     /**
@@ -58,6 +59,8 @@ public class SaitamaSensei {
      * @return The corresponding CommandType enum, or UNKNOWN if the input is invalid.
      */
     private static CommandType getCommandType(String input) {
+        assert input != null : "input command should not be null";
+
         try {
             String firstWord = input.split(" ")[0].toUpperCase();
             return CommandType.valueOf(firstWord);
