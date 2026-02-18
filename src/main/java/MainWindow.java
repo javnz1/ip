@@ -45,19 +45,31 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = saitama.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getSaitamaDialog(response, saitamaImage)
+
+        // 1. Immediately show the User's dialog
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(input, userImage)
         );
         userInput.clear();
 
-        // Check if the command was "bye" (case-insensitive)
-        if (input.trim().equalsIgnoreCase("bye")) {
-            // Pause for 1.5 seconds so the user can see the "Bye" message
-            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
-            delay.setOnFinished(event -> Platform.exit());
-            delay.play();
-        }
+        // 2. Calculate the response beforehand so Saitama is "thinking"
+        String response = saitama.getResponse(input);
+
+        // 3. Create a delay (e.g., 0.8 seconds) before Saitama replies
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.8));
+        delay.setOnFinished(event -> {
+            dialogContainer.getChildren().add(
+                    DialogBox.getSaitamaDialog(response, saitamaImage)
+            );
+
+            // 4. Handle the "bye" logic inside the delay so it doesn't close before the reply
+            if (input.trim().equalsIgnoreCase("bye")) {
+                PauseTransition exitDelay = new PauseTransition(Duration.seconds(1.5));
+                exitDelay.setOnFinished(e -> Platform.exit());
+                exitDelay.play();
+            }
+        });
+
+        delay.play();
     }
 }
