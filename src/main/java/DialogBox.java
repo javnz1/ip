@@ -46,13 +46,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Changes the background color of the dialog bubble.
+     * @param color A CSS color string (e.g., "#D1FFBD" for light green)
+     */
+    private void setBackgroundColor(String color) {
+        dialog.setStyle("-fx-background-color: " + color + "; " +
+                "-fx-background-radius: 10; " +
+                "-fx-padding: 10;");
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setBackgroundColor("#5BECFC"); // Light Blue for User
+        return db;
     }
 
     public static DialogBox getSaitamaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setBackgroundColor("#F5F5F5"); // Light Grey for Saitama
         return db;
     }
 }
