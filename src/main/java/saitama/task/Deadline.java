@@ -32,6 +32,15 @@ public class Deadline extends Task {
         return this.by.toLocalDate().equals(date);
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (super.equals(obj) && obj instanceof Deadline) {
+            return this.by.equals(((Deadline) obj).by);
+        }
+        return false;
+    }
+
     /**
      * Returns a string representation of the Deadline task with its type identifier [D]
      * and the formatted deadline date.

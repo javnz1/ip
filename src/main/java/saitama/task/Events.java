@@ -34,6 +34,15 @@ public class Events extends Task {
         return !date.isBefore(from) && !date.isAfter(to);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (super.equals(obj) && obj instanceof Events) {
+            Events other = (Events) obj;
+            return this.from.equals(other.from) && this.to.equals(other.to);
+        }
+        return false;
+    }
+
     /**
      * Returns a string representation of the Event task with its type identifier [E]
      * and the formatted duration.

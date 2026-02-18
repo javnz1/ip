@@ -53,6 +53,14 @@ public class Task {
         return false;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Task)) return false;
+        Task other = (Task) obj;
+        return this.description.equalsIgnoreCase(other.description);
+    }
+
     /**
      * Returns a string representation of the task, including its status icon and description.
      *

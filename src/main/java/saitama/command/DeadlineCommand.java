@@ -41,6 +41,13 @@ public class DeadlineCommand extends Command{
         try {
             this.by = subcommand[1].trim();
             Task newTaskDeadline = new Deadline(description, by);
+
+            for (Task existingTask : tasks) {
+                if (existingTask.equals(newTaskDeadline)) {
+                    throw new SaitamaException("ONE PUNCH!!! This task is already in your training list! 👊");
+                }
+            }
+
             tasks.add(newTaskDeadline);
 
             output.append(HORIZONTAL_LINE);

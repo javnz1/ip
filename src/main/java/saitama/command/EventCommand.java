@@ -51,6 +51,13 @@ public class EventCommand extends Command{
 
         try {
             Task newTaskEvent = new Events(description, from, to);
+
+            for (Task existingTask : tasks) {
+                if (existingTask.equals(newTaskEvent)) {
+                    throw new SaitamaException("ONE PUNCH!!! This task is already in your training list! 👊");
+                }
+            }
+
             tasks.add(newTaskEvent);
 
             output.append(HORIZONTAL_LINE);

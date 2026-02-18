@@ -26,6 +26,13 @@ public class ToDoCommand extends Command{
         }
 
         Task newTask = new ToDos(description);
+
+        for (Task existingTask : tasks) {
+            if (existingTask.equals(newTask)) {
+                throw new SaitamaException("ONE PUNCH!!! This task is already in your training list! 👊");
+            }
+        }
+
         tasks.add(newTask);
         output.append(HORIZONTAL_LINE);
         output.append("Got it. I've added this task:\n");
