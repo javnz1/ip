@@ -54,17 +54,18 @@ public class ScheduleCommand extends Command {
                     .append(checkDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")))
                     .append("):\n");
 
-            int count = 0;
-            for (Task task : tasks) {
-                if (task.isOnDate(checkDate)) {
-                    count++;
-                    output.append(tasks.indexOf(task) + 1).append(".").append(task).append("\n");
-                }
-            }
+            // Filter the tasks and map them to their formatted strings
+            java.util.List<String> foundTasks = java.util.stream.IntStream.range(0, tasks.size())
+                    .filter(i -> tasks.get(i).isOnDate(checkDate))
+                    .mapToObj(i -> (i + 1) + "." + tasks.get(i))
+                    .collect(java.util.stream.Collectors.toList());
 
-            if (count == 0) {
-                output.append("No tasks found on specific date (").append(checkDate)
+            if (foundTasks.isEmpty()) {
+                output.append("No tasks found on specific date (")
+                        .append(checkDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")))
                         .append("). Better luck next time! 👊\n");
+            } else {
+                foundTasks.forEach(taskString -> output.append(taskString).append("\n"));
             }
             output.append(HORIZONTAL_LINE);
         } catch (java.time.format.DateTimeParseException e) {

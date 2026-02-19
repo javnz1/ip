@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * Iterates through the task list and identifies tasks that contain the keyword.
      * The search is case-insensitive to ensure broad matching.
      *
-     * @param tasks The {@link ArrayList} of {@link Task} objects to search through.
+     * @param tasks   The {@link ArrayList} of {@link Task} objects to search through.
      * @param storage The {@link Storage} handler (unused by this command).
      * @return A formatted list of matching tasks or a "no match" message.
      * @throws SaitamaException If the search keyword is empty.
@@ -47,17 +47,18 @@ public class FindCommand extends Command {
         output.append(HORIZONTAL_LINE);
         output.append("Here are the matching tasks in your list:\n");
 
-        int findCount = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            Task current = tasks.get(i);
-            if (current.description.toLowerCase().contains(description.toLowerCase())) {
-                findCount++;
-                output.append((i + 1)).append(".").append(tasks.get(i)).append("\n");
-            }
-        }
+        // Create a list of strings representing the matching tasks
+        java.util.List<String> foundTasks = java.util.stream.IntStream.range(0, tasks.size())
+                .filter(i -> tasks.get(i).description.toLowerCase()
+                        .contains(description.toLowerCase()))
+                .mapToObj(i -> (i + 1) + "." + tasks.get(i))
+                .collect(java.util.stream.Collectors.toList());
 
-        if (findCount == 0) {
+        // Terminal logic to build the output
+        if (foundTasks.isEmpty()) {
             output.append("No matching tasks found. Better luck next time! 👊\n");
+        } else {
+            foundTasks.forEach(taskStr -> output.append(taskStr).append("\n"));
         }
         output.append(HORIZONTAL_LINE);
 
