@@ -1,3 +1,5 @@
+package saitama;
+
 import javafx.application.Application;
 
 /**
@@ -8,4 +10,3 @@ public class Launcher {
         Application.launch(Main.class, args);
     }
 }
-

@@ -9,7 +9,7 @@ import saitama.storage.Storage;
 import saitama.task.Task;
 
 /**
- * Main entry point and coordinator for the Saitama Sensei task management application.
+ * saitama.Main entry point and coordinator for the Saitama Sensei task management application.
  * This class orchestrates the interaction between the user interface, the command parser,
  * the task list, and the persistent storage system.
  */

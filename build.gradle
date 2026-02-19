@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClass.set("saitama.SaitamaSensei")
+    mainClass.set("saitama.Launcher")
 }
 
 checkstyle {

@@ -57,8 +57,8 @@ ____________________________________________________________
 
 ### Adding a Event: `event`
 Adds a task with a range "from" and "to" date/time.
-* Format: `event [description] /from [dd-MM-yyyy HHmm] /to [dd-MM-yyyy HHmm]`
-* Example: `event to defeat Lord Boros  /from 20-02-2026 /to 20-06-2026`
+* Format: `event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]`
+* Example: `event to defeat Lord Boros /from 20-02-2026 /to 20-06-2026`
 ```
 ____________________________________________________________
 Got it.I've added this task:
