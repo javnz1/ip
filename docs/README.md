@@ -1,11 +1,6 @@
 # 👊 SaitamaSensei Taskbot User Guide 👊
 
-// Update the title above to match the actual product name
-
-// Product screenshot goes here
 ![SaitamaSensei UI](Ui.png)
-
-// Product intro goes here
 
 Saitama Sensei is a hero for fun and a task manager for efficiency. 
 He helps you track your training regimen (ToDos, Deadlines, and Events) with minimal effort.
