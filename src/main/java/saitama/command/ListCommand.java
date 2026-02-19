@@ -1,17 +1,17 @@
 package saitama.command;
 
+import java.util.ArrayList;
+
 import saitama.exception.SaitamaException;
 import saitama.storage.Storage;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to display all tasks currently in the task list.
  * This command iterates through the list and formats each task with its
  * corresponding index for the user to view.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
 
     /**

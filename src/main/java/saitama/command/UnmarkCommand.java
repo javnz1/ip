@@ -1,17 +1,17 @@
 package saitama.command;
 
+import java.util.ArrayList;
+
 import saitama.exception.SaitamaException;
 import saitama.storage.Storage;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to revert a specific task's status to not completed.
  * This command identifies a task by its index, updates its status to "not done",
  * and synchronizes the change with the storage file.
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
     private String description;
 
@@ -29,11 +29,11 @@ public class UnmarkCommand extends Command{
      * Converts the user-provided index to a 0-based integer, updates the
      * task's internal state to incomplete, and saves the list to storage.
      *
-     * @param tasks The {@link ArrayList} of {@link Task} objects.
+     * @param tasks   The {@link ArrayList} of {@link Task} objects.
      * @param storage The {@link Storage} handler used to persist the state change.
      * @return A confirmation message showing the updated task status.
-     * @throws SaitamaException If the description is empty.
-     * @throws NumberFormatException If the description is not a valid integer.
+     * @throws SaitamaException          If the description is empty.
+     * @throws NumberFormatException     If the description is not a valid integer.
      * @throws IndexOutOfBoundsException If the task number is outside the range of the list.
      */
     @Override

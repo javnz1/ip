@@ -1,19 +1,19 @@
 package saitama.command;
 
-import saitama.exception.SaitamaException;
-import saitama.storage.Storage;
-import saitama.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import saitama.exception.SaitamaException;
+import saitama.storage.Storage;
+import saitama.task.Task;
 
 /**
  * Represents a command to view tasks occurring on a specific date.
  * This command parses a user-provided date string and filters the task list
  * for any Deadlines or Events that match that particular date.
  */
-public class ScheduleCommand extends Command{
+public class ScheduleCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
     private String description;
 
@@ -31,7 +31,7 @@ public class ScheduleCommand extends Command{
      * Parses the input into a {@link LocalDate}, iterates through the task list,
      * and identifies tasks occurring on that date using the {@code isOnDate} method.
      *
-     * @param tasks The {@link ArrayList} of {@link Task} objects to filter.
+     * @param tasks   The {@link ArrayList} of {@link Task} objects to filter.
      * @param storage The {@link Storage} handler (unused by this command).
      * @return A formatted list of tasks occurring on the specified date.
      * @throws SaitamaException If the input is empty or the date format is invalid.
@@ -63,7 +63,8 @@ public class ScheduleCommand extends Command{
             }
 
             if (count == 0) {
-                output.append("No tasks found on specific date (").append(checkDate).append("). Better luck next time! 👊\n");
+                output.append("No tasks found on specific date (").append(checkDate)
+                        .append("). Better luck next time! 👊\n");
             }
             output.append(HORIZONTAL_LINE);
         } catch (java.time.format.DateTimeParseException e) {

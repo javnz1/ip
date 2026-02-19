@@ -1,16 +1,16 @@
 package saitama.command;
 
+import java.util.ArrayList;
+
 import saitama.exception.SaitamaException;
 import saitama.storage.Storage;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to terminate the Saitama Sensei application.
  * This command generates a farewell message for the user and signals the end of the session.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
 
     /**

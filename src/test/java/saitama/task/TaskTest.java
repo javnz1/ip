@@ -1,8 +1,8 @@
 package saitama.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for the {@link Task} hierarchy.
@@ -40,7 +40,7 @@ public class TaskTest {
     @Test
     public void testDeadlineDateParsing() {
         Deadline d = new Deadline("Final Boss", "20-12-2024 1800");
-        assertEquals("Dec 20 2024, 6:00pm", d.by.format(java.time.format.DateTimeFormatter.ofPattern("MMM d yyyy, " +
-                "h:mma")));
+        assertEquals("Dec 20 2024, 6:00pm", d.by.format(java.time.format.DateTimeFormatter.ofPattern("MMM d yyyy, "
+                + "h:mma")));
     }
 }

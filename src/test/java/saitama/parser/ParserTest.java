@@ -1,9 +1,10 @@
 package saitama.parser;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import saitama.command.ToDoCommand;
 import saitama.exception.SaitamaException;
@@ -18,7 +19,6 @@ public class ParserTest {
     /**
      * Verifies that a valid "todo" command string is correctly parsed into
      * a {@link ToDoCommand} instance.
-     * * @throws SaitamaException if the parsing fails unexpectedly.
      */
     @Test
     public void parse_validTodo_success() throws SaitamaException {

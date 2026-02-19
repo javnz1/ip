@@ -51,9 +51,10 @@ public class DialogBox extends HBox {
      * @param color A CSS color string (e.g., "#D1FFBD" for light green)
      */
     private void setBackgroundColor(String color) {
-        dialog.setStyle("-fx-background-color: " + color + "; " +
-                "-fx-background-radius: 10; " +
-                "-fx-padding: 10;");
+        dialog.setStyle("-fx-background-color: "
+                + color + "; "
+                + "-fx-background-radius: 10; "
+                + "-fx-padding: 10;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

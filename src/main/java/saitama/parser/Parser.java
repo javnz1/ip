@@ -71,7 +71,7 @@ public class Parser {
                     + "Please input a specific PUNCH command in the format below:\n"
                     + "list\n"
                     + "todo [description]\n"
-                    + "deadline [description] /by [dd-MM-yyyy HHmm]n"
+                    + "deadline [description] /by [dd-MM-yyyy HHmm]\n"
                     + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]\n"
                     + "mark [task number in the list]\n"
                     + "unmark [task number in the list]\n"

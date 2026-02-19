@@ -1,17 +1,17 @@
 package saitama.command;
 
+import java.util.ArrayList;
+
 import saitama.exception.SaitamaException;
 import saitama.storage.Storage;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to mark a specific task as completed.
  * This command identifies a task by its index in the task list, updates its
  * status to "done", and ensures the change is reflected in the storage file.
  */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
     private String description;
 

@@ -1,11 +1,11 @@
 package saitama.command;
 
+import java.util.ArrayList;
+
 import saitama.exception.SaitamaException;
 import saitama.storage.Storage;
 import saitama.task.Deadline;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to add a deadline task to the task list.
@@ -32,11 +32,11 @@ public class DeadlineCommand extends Command {
      * and follows the correct date-time format (dd-MM-yyyy HHmm).
      * It also prevents duplicate tasks from being added.
      *
-     * @param tasks The {@link ArrayList} of {@link Task} objects.
+     * @param tasks   The {@link ArrayList} of {@link Task} objects.
      * @param storage The {@link Storage} handler for saving data.
      * @return A success message confirming the addition of the deadline.
      * @throws SaitamaException If the input is malformed, the date format is invalid,
-     * or a duplicate task is detected.
+     *                          or a duplicate task is detected.
      */
     @Override
     public String execute(ArrayList<Task> tasks, Storage storage) throws SaitamaException {

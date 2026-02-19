@@ -1,11 +1,11 @@
 package saitama.command;
 
+import java.util.ArrayList;
+
 import saitama.exception.SaitamaException;
 import saitama.storage.Storage;
 import saitama.task.Events;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to add an event task to the task list.
@@ -72,8 +72,10 @@ public class EventCommand extends Command {
                     + "PLEASE input dd-MM-yyyy for both! 👊\n"
                     + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
         }
-        java.time.LocalDate startDate = java.time.LocalDate.parse(from, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        java.time.LocalDate endDate = java.time.LocalDate.parse(to, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        java.time.LocalDate startDate = java.time.LocalDate
+                .parse(from, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        java.time.LocalDate endDate = java.time.LocalDate
+                .parse(to, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         if (startDate.isAfter(endDate)) {
             throw new SaitamaException("ONE PUNCH!!! Your start date (/from) cannot be after your end date (/to)! 👊\n"

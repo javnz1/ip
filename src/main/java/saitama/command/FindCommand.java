@@ -1,17 +1,17 @@
 package saitama.command;
 
+import java.util.ArrayList;
+
 import saitama.exception.SaitamaException;
 import saitama.storage.Storage;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to search for tasks within the task list.
  * This command filters tasks based on whether their descriptions contain
  * a specific keyword provided by the user.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
     private String description;
 

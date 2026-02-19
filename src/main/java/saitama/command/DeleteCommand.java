@@ -1,17 +1,17 @@
 package saitama.command;
 
+import java.util.ArrayList;
+
 import saitama.exception.SaitamaException;
 import saitama.storage.Storage;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to remove a specific task from the task list.
  * This command parses the task index provided by the user, removes the
  * corresponding task from the list, and updates the hard disk storage.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
     private String description;
 

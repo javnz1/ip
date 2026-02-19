@@ -1,10 +1,12 @@
 package saitama.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
 import org.junit.jupiter.api.Test;
+
 import saitama.task.Task;
 import saitama.task.ToDos;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for the {@link Storage} component.

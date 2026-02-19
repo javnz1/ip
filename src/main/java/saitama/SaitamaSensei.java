@@ -1,12 +1,12 @@
 package saitama;
 
+import java.util.ArrayList;
+
 import saitama.command.Command;
 import saitama.exception.SaitamaException;
 import saitama.parser.Parser;
 import saitama.storage.Storage;
 import saitama.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Main entry point and coordinator for the Saitama Sensei task management application.
