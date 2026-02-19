@@ -1,7 +1,4 @@
-T | 0 | swim
-T | 0 | punch
-T | 0 | jump
-E | 1 | Career Fair | 28-01-2026 | 30-01-2026
-D | 0 | jumping block | 29-01-2026 2359
-E | 0 | cycling | 11-02-2026 | 13-02-2026
-D | 0 | play badminton /by 13-02-2026 2000 | 13-02-2026 2000
+T | 1 | jump
+E | 0 | travel | 26-02-2026 | 28-02-2026
+D | 0 | homework | 22-02-2026 2359
+E | 1 | speech | 19-02-2026 | 25-02-2026

@@ -7,16 +7,39 @@ import saitama.task.Task;
 
 import java.util.ArrayList;
 
-public class EventCommand extends Command{
+/**
+ * Represents a command to add an event task to the task list.
+ * This command parses the user input to extract the task description, start date,
+ * and end date, validates the presence of required delimiters, checks for
+ * duplicates, and persists the data to storage.
+ */
+public class EventCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
     private String description;
     private String from;
     private String to;
 
-    public EventCommand (String description) {
+    /**
+     * Constructs an {@code EventCommand} with the provided raw input.
+     *
+     * @param description The full command string following the command word.
+     */
+    public EventCommand(String description) {
         this.description = description;
     }
 
+    /**
+     * Executes the event addition logic.
+     * Parses the input string for "/from" and "/to" tags, ensures date formats
+     * are valid (dd-MM-yyyy), verifies the task is not a duplicate,
+     * and updates the task list and storage.
+     *
+     * @param tasks   The {@link ArrayList} of {@link Task} objects.
+     * @param storage The {@link Storage} handler for saving data.
+     * @return A success message confirming the addition of the event.
+     * @throws SaitamaException If the description is empty, delimiters are missing,
+     *                          dates are malformed, or a duplicate is detected.
+     */
     @Override
     public String execute(ArrayList<Task> tasks, Storage storage) throws SaitamaException {
         StringBuilder output = new StringBuilder();
@@ -34,6 +57,7 @@ public class EventCommand extends Command{
         }
 
         String[] subcommandEvent = description.split("/from ");
+        this.description = subcommandEvent[0].trim();
         String[] date = subcommandEvent[1].split("/to ");
 
         if (date.length < 2) {
@@ -48,7 +72,13 @@ public class EventCommand extends Command{
                     + "PLEASE input dd-MM-yyyy for both! 👊\n"
                     + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
         }
+        java.time.LocalDate startDate = java.time.LocalDate.parse(from, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        java.time.LocalDate endDate = java.time.LocalDate.parse(to, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
+        if (startDate.isAfter(endDate)) {
+            throw new SaitamaException("ONE PUNCH!!! Your start date (/from) cannot be after your end date (/to)! 👊\n"
+                    + "Please ensure you PUNCH the dates in the right order!");
+        }
         try {
             Task newTaskEvent = new Events(description, from, to);
 

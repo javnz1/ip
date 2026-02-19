@@ -5,18 +5,39 @@ import saitama.storage.Storage;
 import saitama.task.Deadline;
 import saitama.task.Task;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class DeadlineCommand extends Command{
+/**
+ * Represents a command to add a deadline task to the task list.
+ * This command parses the user input to extract the task description and the deadline date/time,
+ * validates the input format, checks for duplicates, and saves the updated list to storage.
+ */
+public class DeadlineCommand extends Command {
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
     private String description;
     private String by;
 
+    /**
+     * Constructs a new {@code DeadlineCommand} with the provided description.
+     *
+     * @param description The raw input containing the task details and the "/by" delimiter.
+     */
     public DeadlineCommand(String description) {
         this.description = description;
     }
 
+    /**
+     * Executes the deadline command.
+     * Validates that the description is not empty, contains the required "/by" delimiter,
+     * and follows the correct date-time format (dd-MM-yyyy HHmm).
+     * It also prevents duplicate tasks from being added.
+     *
+     * @param tasks The {@link ArrayList} of {@link Task} objects.
+     * @param storage The {@link Storage} handler for saving data.
+     * @return A success message confirming the addition of the deadline.
+     * @throws SaitamaException If the input is malformed, the date format is invalid,
+     * or a duplicate task is detected.
+     */
     @Override
     public String execute(ArrayList<Task> tasks, Storage storage) throws SaitamaException {
         StringBuilder output = new StringBuilder();
@@ -32,6 +53,7 @@ public class DeadlineCommand extends Command{
         }
 
         String[] subcommand = description.split("/by ");
+        this.description = subcommand[0].trim();
 
         if (subcommand.length < 2 || subcommand[1].trim().isEmpty()) {
             throw new SaitamaException("ONE PUNCH!!! The PUNCH /by can't be empty PLEASE "

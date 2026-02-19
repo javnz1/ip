@@ -6,14 +6,34 @@ import saitama.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a command to search for tasks within the task list.
+ * This command filters tasks based on whether their descriptions contain
+ * a specific keyword provided by the user.
+ */
 public class FindCommand extends Command{
     private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
     private String description;
 
+    /**
+     * Constructs a {@code FindCommand} with the specified search keyword.
+     *
+     * @param description The keyword used to match against task descriptions.
+     */
     public FindCommand(String description) {
         this.description = description;
     }
 
+    /**
+     * Executes the find command.
+     * Iterates through the task list and identifies tasks that contain the keyword.
+     * The search is case-insensitive to ensure broad matching.
+     *
+     * @param tasks The {@link ArrayList} of {@link Task} objects to search through.
+     * @param storage The {@link Storage} handler (unused by this command).
+     * @return A formatted list of matching tasks or a "no match" message.
+     * @throws SaitamaException If the search keyword is empty.
+     */
     @Override
     public String execute(ArrayList<Task> tasks, Storage storage) throws SaitamaException {
         StringBuilder output = new StringBuilder();

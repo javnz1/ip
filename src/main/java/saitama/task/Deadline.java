@@ -32,7 +32,14 @@ public class Deadline extends Task {
         return this.by.toLocalDate().equals(date);
     }
 
-
+    /**
+     * Compares this deadline with another object for equality.
+     * Two deadlines are considered equal if they have the same description
+     * and the exact same deadline date and time.
+     *
+     * @param obj The object to compare with.
+     * @return {@code true} if the objects are equal; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (super.equals(obj) && obj instanceof Deadline) {

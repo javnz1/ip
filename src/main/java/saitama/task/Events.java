@@ -34,6 +34,14 @@ public class Events extends Task {
         return !date.isBefore(from) && !date.isAfter(to);
     }
 
+    /**
+     * Compares this event with another object for equality.
+     * Two events are considered equal if they share the same description,
+     * start date, and end date.
+     *
+     * @param obj The object to compare with.
+     * @return {@code true} if the events are identical; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (super.equals(obj) && obj instanceof Events) {

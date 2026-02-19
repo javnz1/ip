@@ -9,8 +9,9 @@ import saitama.task.Task;
 import java.util.ArrayList;
 
 /**
- * Main entry point for the Saitama Sensei task management application.
- * Handles user input, command execution, and task list coordination.
+ * Main entry point and coordinator for the Saitama Sensei task management application.
+ * This class orchestrates the interaction between the user interface, the command parser,
+ * the task list, and the persistent storage system.
  */
 public class SaitamaSensei {
     private static Storage storage;
@@ -29,9 +30,13 @@ public class SaitamaSensei {
     }
 
     /**
-     * Generates a response for the user's chat message.
+     * Processes user input and generates a response.
+     * This method acts as the primary interface for the UI, translating user strings
+     * into commands and capturing any execution errors to present as user-friendly feedback.
+     *
+     * @param inputCommand The raw string input from the user.
+     * @return A {@code String} response from Saitama Sensei regarding the action performed.
      */
-
     public String getResponse(String inputCommand) {
         try {
             Command c = Parser.parse(inputCommand);

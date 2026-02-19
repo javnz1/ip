@@ -53,6 +53,14 @@ public class Task {
         return false;
     }
 
+    /**
+     * Compares this task with another object for equality.
+     * Two tasks are considered equal if their descriptions match, ignoring case.
+     * This is used to prevent duplicate training entries in the list.
+     *
+     * @param obj The object to compare with this task.
+     * @return {@code true} if the descriptions are equal regardless of case; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
