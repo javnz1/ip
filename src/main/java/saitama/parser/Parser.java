@@ -69,15 +69,15 @@ public class Parser {
         default:
             throw new SaitamaException("ONE PUNCH!!! I don't understand you. "
                     + "Please input a specific PUNCH command in the format below:\n"
-                    + "list\n"
-                    + "todo [description]\n"
-                    + "deadline [description] /by [dd-MM-yyyy HHmm]\n"
-                    + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]\n"
-                    + "mark [task number in the list]\n"
-                    + "unmark [task number in the list]\n"
-                    + "find [task keyword]\n"
-                    + "schedule [dd-MM-yyyy]\n"
-                    + "delete [task number in the list]");
+                    + "👊 list\n"
+                    + "👊 todo [description]\n"
+                    + "👊 deadline [description] /by [dd-MM-yyyy HHmm]\n"
+                    + "👊 event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]\n"
+                    + "👊 mark [task number in the list]\n"
+                    + "👊 unmark [task number in the list]\n"
+                    + "👊 find [task keyword]\n"
+                    + "👊 schedule [dd-MM-yyyy]\n"
+                    + "👊 delete [task number in the list]");
         }
     }
 

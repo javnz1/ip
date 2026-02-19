@@ -51,4 +51,24 @@ public class SaitamaSensei {
             return HORIZONTAL_LINE + "Something went wrong! 👊\n" + HORIZONTAL_LINE;
         }
     }
+
+    /**
+     * Returns a welcome message and a list of available commands.
+     * This greeting is displayed when the application starts to guide the user.
+     *
+     * @return A string containing the welcome message and command format instructions.
+     */
+    public String getGreeting() {
+        return "Welcome to SaitamaSensei Taskbot. I'm Saitama. I'm a hero for fun.\n"
+                + "What's on your schedule today? Here's how to PUNCH in commands:\n\n"
+                + "👊 list\n"
+                + "👊 todo [description]\n"
+                + "👊 deadline [description] /by [dd-MM-yyyy HHmm]\n"
+                + "👊 event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]\n"
+                + "👊 mark [task number in the list]\n"
+                + "👊 unmark [task number in the list]\n"
+                + "👊 find [task keyword]\n"
+                + "👊 schedule [dd-MM-yyyy]\n"
+                + "👊 delete [task number in the list]";
+    }
 }

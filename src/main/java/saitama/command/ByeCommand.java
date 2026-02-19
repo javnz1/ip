@@ -33,7 +33,7 @@ public class ByeCommand extends Command {
         StringBuilder output = new StringBuilder();
 
         output.append(HORIZONTAL_LINE);
-        output.append("Bye. Hope to see you again soon!").append("\n");
+        output.append("Bye. Hope to see you again soon! 👊").append("\n");
         output.append(HORIZONTAL_LINE);
 
         return output.toString();

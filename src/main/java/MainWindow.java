@@ -36,6 +36,10 @@ public class MainWindow extends AnchorPane {
     /** Injects the Saitama instance */
     public void setSaitama(SaitamaSensei s) {
         saitama = s;
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getSaitamaDialog(saitama.getGreeting(), saitamaImage)
+        );
     }
 
     /**
