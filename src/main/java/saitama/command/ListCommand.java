@@ -12,7 +12,7 @@ import saitama.task.Task;
  * corresponding index for the user to view.
  */
 public class ListCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
 
     /**
      * Constructs a new {@code ListCommand} instance.

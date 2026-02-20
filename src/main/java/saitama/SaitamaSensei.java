@@ -15,7 +15,7 @@ import saitama.task.Task;
  */
 public class SaitamaSensei {
     private static Storage storage;
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private static ArrayList<Task> taskList;
 
     /**
@@ -69,6 +69,7 @@ public class SaitamaSensei {
                 + "👊 unmark [task number in the list]\n"
                 + "👊 find [task keyword]\n"
                 + "👊 schedule [dd-MM-yyyy]\n"
-                + "👊 delete [task number in the list]";
+                + "👊 delete [task number in the list]\n"
+                + "👊 bye";
     }
 }

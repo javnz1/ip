@@ -77,7 +77,8 @@ public class Parser {
                     + "👊 unmark [task number in the list]\n"
                     + "👊 find [task keyword]\n"
                     + "👊 schedule [dd-MM-yyyy]\n"
-                    + "👊 delete [task number in the list]");
+                    + "👊 delete [task number in the list]\n"
+                    + "👊 bye");
         }
     }
 

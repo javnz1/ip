@@ -12,7 +12,7 @@ import saitama.task.Task;
  * a specific keyword provided by the user.
  */
 public class FindCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private String description;
 
     /**

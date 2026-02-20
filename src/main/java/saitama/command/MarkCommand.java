@@ -12,7 +12,7 @@ import saitama.task.Task;
  * status to "done", and ensures the change is reflected in the storage file.
  */
 public class MarkCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private String description;
 
     /**

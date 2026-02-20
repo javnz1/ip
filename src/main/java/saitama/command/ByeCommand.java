@@ -11,7 +11,7 @@ import saitama.task.Task;
  * This command generates a farewell message for the user and signals the end of the session.
  */
 public class ByeCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
 
     /**
      * Constructs a new {@code ByeCommand} instance.

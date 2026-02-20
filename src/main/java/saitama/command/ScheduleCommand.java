@@ -14,7 +14,7 @@ import saitama.task.Task;
  * for any Deadlines or Events that match that particular date.
  */
 public class ScheduleCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private String description;
 
     /**

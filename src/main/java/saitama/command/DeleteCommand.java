@@ -12,7 +12,7 @@ import saitama.task.Task;
  * corresponding task from the list, and updates the hard disk storage.
  */
 public class DeleteCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private String description;
 
     /**

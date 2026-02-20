@@ -14,7 +14,7 @@ import saitama.task.Task;
  * duplicates, and persists the data to storage.
  */
 public class EventCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private String description;
     private String from;
     private String to;

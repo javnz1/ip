@@ -13,7 +13,7 @@ import saitama.task.ToDos;
  * ensures the input is valid upon construction, and checks for duplicates during execution.
  */
 public class ToDoCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private String description;
 
     /**

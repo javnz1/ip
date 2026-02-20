@@ -13,7 +13,7 @@ import saitama.task.Task;
  * validates the input format, checks for duplicates, and saves the updated list to storage.
  */
 public class DeadlineCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private String description;
     private String by;
 

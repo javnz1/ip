@@ -12,7 +12,7 @@ import saitama.task.Task;
  * and synchronizes the change with the storage file.
  */
 public class UnmarkCommand extends Command {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "_______________________________\n";
     private String description;
 
     /**

@@ -56,7 +56,8 @@ public class DialogBox extends HBox {
         dialog.setStyle("-fx-background-color: "
                 + color + "; "
                 + "-fx-background-radius: 10; "
-                + "-fx-padding: 10;");
+                + "-fx-padding: 10;"
+                + "-fx-text-fill: black;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
