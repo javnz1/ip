@@ -1,5 +1,7 @@
 package saitama.task;
 
+import static saitama.parser.Parser.DATE_INPUT_FORMATTER;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,8 +21,8 @@ public class Events extends Task {
      */
     public Events(String description, String from, String to) {
         super(description);
-        this.from = LocalDate.parse(from.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        this.to = LocalDate.parse(to.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        this.from = LocalDate.parse(from.trim(), DATE_INPUT_FORMATTER);
+        this.to = LocalDate.parse(to.trim(), DATE_INPUT_FORMATTER);
     }
 
     /**

@@ -81,7 +81,7 @@ public class DeadlineCommand extends Command {
             storage.save(tasks);
         } catch (java.time.format.DateTimeParseException e) {
             throw new SaitamaException("ONE PUNCH!!! SaitamaSensei only understands dates in "
-                    + "dd-MM-yyyy HHmm format! 👊\n"
+                    + "dd-MM-yyyy HHmm format! Please ensure you provide a valid dates too 👊\n"
                     + "deadline [description] /by [dd-MM-yyyy HHmm]");
         }
         return output.toString();

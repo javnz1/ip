@@ -48,7 +48,8 @@ public class SaitamaSensei {
         } catch (IndexOutOfBoundsException e) {
             return HORIZONTAL_LINE + "ONE PUNCH!!! That task number doesn't exist in the list! 👊\n" + HORIZONTAL_LINE;
         } catch (Exception e) {
-            return HORIZONTAL_LINE + "Something went wrong! 👊\n" + HORIZONTAL_LINE;
+            return HORIZONTAL_LINE + "Something went wrong! Please ensure you input the right format and valid "
+                    + "dates 👊\n" + HORIZONTAL_LINE;
         }
     }
 

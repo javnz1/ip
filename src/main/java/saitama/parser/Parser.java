@@ -1,5 +1,8 @@
 package saitama.parser;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+
 import saitama.command.ByeCommand;
 import saitama.command.Command;
 import saitama.command.DeadlineCommand;
@@ -18,6 +21,9 @@ import saitama.exception.SaitamaException;
  * This class translates raw user input strings into executable {@link Command} objects.
  */
 public class Parser {
+    public static final DateTimeFormatter DATE_INPUT_FORMATTER =
+            DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
+
     /**
      * Represents the various commands supported by Saitama Sensei.
      * Used internally to map raw strings to logical command categories.

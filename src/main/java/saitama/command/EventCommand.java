@@ -1,5 +1,7 @@
 package saitama.command;
 
+import static saitama.parser.Parser.DATE_INPUT_FORMATTER;
+
 import java.util.ArrayList;
 
 import saitama.exception.SaitamaException;
@@ -72,16 +74,15 @@ public class EventCommand extends Command {
                     + "PLEASE input dd-MM-yyyy for both! 👊\n"
                     + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
         }
-        java.time.LocalDate startDate = java.time.LocalDate
-                .parse(from, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        java.time.LocalDate endDate = java.time.LocalDate
-                .parse(to, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        java.time.LocalDate startDate = java.time.LocalDate.parse(from, DATE_INPUT_FORMATTER);
+        java.time.LocalDate endDate = java.time.LocalDate.parse(to, DATE_INPUT_FORMATTER);
 
-        if (startDate.isAfter(endDate)) {
-            throw new SaitamaException("ONE PUNCH!!! Your start date (/from) cannot be after your end date (/to)! 👊\n"
-                    + "Please ensure you PUNCH the dates in the right order!");
-        }
         try {
+            if (startDate.isAfter(endDate)) {
+                throw new SaitamaException("ONE PUNCH!!! Your start date (/from) cannot be after "
+                        + "your end date (/to)! 👊\n"
+                        + "Please ensure you PUNCH the dates in the right order!");
+            }
             Task newTaskEvent = new Events(description, from, to);
 
             for (Task existingTask : tasks) {
@@ -101,7 +102,7 @@ public class EventCommand extends Command {
             storage.save(tasks);
         } catch (java.time.format.DateTimeParseException e) {
             throw new SaitamaException("ONE PUNCH!!! SaitamaSensei only understands dates "
-                    + "in dd-MM-yyyy format! 👊\n"
+                    + "in dd-MM-yyyy format! Please ensure you provide a valid dates too 👊\n"
                     + "event [description] /from [dd-MM-yyyy] /to [dd-MM-yyyy]");
         }
         return output.toString();

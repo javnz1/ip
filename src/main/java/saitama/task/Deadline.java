@@ -18,7 +18,9 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDateTime.parse(by.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        this.by = LocalDateTime.parse(by.trim(),
+                DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm")
+                .withResolverStyle(java.time.format.ResolverStyle.STRICT));
     }
 
     /**
